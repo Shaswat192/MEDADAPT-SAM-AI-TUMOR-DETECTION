@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedAdapt-SAM Project Poster</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f4c75;
+            --secondary: #3282b8;
+            --accent: #bbe1fa;
+            --highlight: #ff6b6b;
+            --bg-light: #f9fbfc;
+            --text-dark: #1b262c;
+            --border-color: #d1d9e6;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            --gradient: linear-gradient(135deg, #0f4c75 0%, #3282b8 100%);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #e0e5ec;
+            color: var(--text-dark);
+            display: flex;
+            justify-content: center;
+        }
+
+        .poster-container {
+            width: 841px;
+            height: 1189px;
+            background-color: var(--bg-light);
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            padding: 50px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Decorative Background Elements */
+        .poster-container::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: var(--accent);
+            opacity: 0.1;
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        header {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            border-bottom: 4px solid var(--primary);
+            padding-bottom: 25px;
+        }
+
+        .university-logos {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .logo-box {
+            width: 70px;
+            height: 70px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--primary);
+            font-size: 36px;
+            font-weight: 700;
+            margin: 15px 0;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .authors {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-top: 5px;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            z-index: 1;
+        }
+
+        section {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--primary);
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 24px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+
+        ul {
+            padding-left: 15px;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 12px;
+            line-height: 1.5;
+            font-size: 15px;
+        }
+
+        /* Workflow Visual */
+        .workflow-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .flow-step {
+            background: var(--gradient);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            width: 80%;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 4px 10px rgba(50, 130, 184, 0.3);
+            position: relative;
+        }
+
+        .flow-step::after {
+            content: '↓';
+            position: absolute;
+            bottom: -22px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--secondary);
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .flow-step:last-child::after {
+            content: '';
+        }
+
+        /* Results Visualization */
+        .viz-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .viz-box {
+            position: relative;
+            background: #000;
+            height: 140px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 2px solid var(--border-color);
+        }
+
+        .viz-label {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-size: 11px;
+            padding: 5px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        /* SVG Brain Placeholder */
+        .brain-svg {
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        /* Social Impact */
+        .sdg-card {
+            grid-column: span 2;
+            display: flex;
+            gap: 25px;
+            align-items: center;
+            background: linear-gradient(to right, #e8f5e9, #ffffff);
+            border-left: 8px solid #4caf50;
+        }
+
+        .sdg-logo {
+            flex-shrink: 0;
+            width: 120px;
+            height: 120px;
+            background: #4caf50;
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+        }
+
+        .sdg-number {
+            font-size: 40px;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .sdg-text {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-top: 5px;
+        }
+
+        .impact-content p {
+            margin: 0;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        footer {
+            margin-top: auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-banner {
+            background: var(--primary);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .campus-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .date {
+            font-family: 'Outfit', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--highlight);
+            margin: 10px 0;
+        }
+
+        .uni-info {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="poster-container">
+        <header>
+            <div class="university-logos">
+                <!-- Use actual logo text/icons as SVGs -->
+                <div class="logo-box"><svg width="50" height="50" viewBox="0 0 50 50">
+                        <circle cx="25" cy="25" r="20" fill="#0f4c75" opacity="0.1" /><text x="50%" y="50%"
+                            dominant-baseline="middle" text-anchor="middle" font-size="20" fill="#0f4c75"
+                            font-weight="bold">CU</text>
+                    </svg></div>
+                <div class="logo-box"><svg width="50" height="50" viewBox="0 0 50 50">
+                        <rect x="10" y="10" width="30" height="30" rx="5" fill="#3282b8" opacity="0.1" /><text x="50%"
+                            y="50%" dominant-baseline="middle" text-anchor="middle" font-size="20" fill="#3282b8"
+                            font-weight="bold">GJ</text>
+                    </svg></div>
+                <div class="logo-box"><svg width="50" height="50" viewBox="0 0 50 50">
+                        <path d="M25 10 L40 40 L10 40 Z" fill="#4caf50" opacity="0.1" /><text x="50%" y="65%"
+                            dominant-baseline="middle" text-anchor="middle" font-size="16" fill="#4caf50"
+                            font-weight="bold">SJ</text>
+                    </svg></div>
+                <div class="logo-box"><svg width="50" height="50" viewBox="0 0 50 50">
+                        <circle cx="25" cy="25" r="18" fill="none" stroke="#ff6b6b" stroke-width="3" /><text x="50%"
+                            y="50%" dominant-baseline="middle" text-anchor="middle" font-size="18" fill="#ff6b6b"
+                            font-weight="bold">XP</text>
+                    </svg></div>
+                <div class="logo-box"><svg width="50" height="50" viewBox="0 0 50 50"><text x="50%" y="50%"
+                            dominant-baseline="middle" text-anchor="middle" font-size="24" fill="#ffcc00"
+                            font-weight="bold">A+</text></svg></div>
+            </div>
+            <h1>MEDADAPT-SAM: AUTOMATIC PROMPT-DRIVEN BRAIN TUMOR SEGMENTATION</h1>
+            <div class="authors">Shaswat Pradhan, Nikhil Kumar</div>
+        </header>
+
+        <div class="main-content">
+            <section>
+                <h2>OBJECTIVES</h2>
+                <ul>
+                    <li><strong>Automated Precision:</strong> Develop a prompt-driven system using Segment Anything
+                        Model (SAM) for BraTS 2021 dataset.</li>
+                    <li><strong>Domain Adaptation:</strong> Implementation of specialized bottleneck adapters for
+                        high-fidelity medical imaging features.</li>
+                    <li><strong>Uncertainty Guidance:</strong> Integration of Monte Carlo Dropout to identify and refine
+                        ambiguous segmentation boundaries.</li>
+                    <li><strong>Clinical Intelligence:</strong> Automated clinical report generation and visualization
+                        for immediate diagnostic support.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>WORKFLOW</h2>
+                <div class="workflow-visual">
+                    <div class="flow-step">BraTS 2021 Data Pipeline</div>
+                    <div class="flow-step">SAM Adapter Training</div>
+                    <div class="flow-step">Auto-Prompt Generation</div>
+                    <div class="flow-step">Uncertainty Refinement Loop</div>
+                    <div class="flow-step">Clinical Insights Dashboard</div>
+                </div>
+            </section>
+
+            <section style="grid-column: span 2;">
+                <h2 style="justify-content: center;">RESULT</h2>
+                <div
+                    style="display: flex; gap: 15px; justify-content: space-between; align-items: stretch; margin-top: 10px;">
+                    <!-- App Start Screen -->
+                    <div
+                        style="flex: 1; background: #0a192f; border: 1px solid #1f77b4; border-radius: 5px; padding: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
+                        <div
+                            style="font-size: 10px; color: #64ffda; border-bottom: 1px solid #112240; padding-bottom: 5px; margin-bottom: 8px; font-family: 'Outfit', sans-serif;">
+                            MedAdapt-SAM: Dashboard</div>
+                        <div
+                            style="background: rgba(255,255,255,0.05); height: 120px; border-radius: 3px; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 10px;">
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#64ffda"
+                                stroke-width="1.5">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5-5 5 5M12 15V3" />
+                            </svg>
+                            <div style="font-size: 8px; text-align: center; color: #8892b0;">Upload T1CE Patient MRI
+                                Slice<br>(256x256 PNG/NIfTI)</div>
+                            <div style="width: 80%; height: 2px; background: #112240; position: relative;">
+                                <div style="width: 40%; height: 100%; background: #64ffda;"></div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 8px; font-size: 7px; color: #ccd6f6;">Select Model: <b>SAM-Adapter
+                                (Auto)</b></div>
+                    </div>
+
+                    <!-- MRI Result Screen -->
+                    <div
+                        style="flex: 1; background: #000; border: 2px solid #333; border-radius: 5px; overflow: hidden; position: relative;">
+                        <svg viewBox="0 0 100 120" style="width: 100%; height: 100%;">
+                            <rect width="100" height="120" fill="#000" />
+                            <!-- MRI Brain Scan -->
+                            <path
+                                d="M50 15 C25 15 15 40 15 60 C15 85 30 95 50 95 C70 95 85 85 85 60 C85 40 75 15 50 15 Z"
+                                fill="#1a1a1a" />
+                            <path
+                                d="M50 20 C30 20 20 40 20 60 C20 80 35 90 50 90 C65 90 80 80 80 60 C80 40 70 20 50 20 Z"
+                                fill="#222" opacity="0.5" />
+                            <!-- Tumor Mask -->
+                            <path d="M55 45 Q65 40 70 50 Q65 65 50 60 Q45 50 55 45" fill="rgba(100, 255, 218, 0.4)"
+                                stroke="#64ffda" stroke-width="0.5" />
+                            <path d="M58 48 Q62 46 64 50 Q62 55 58 52 Z" fill="rgba(255, 107, 107, 0.6)"
+                                stroke="#ff6b6b" stroke-width="0.3" />
+                            <text x="10" y="112" fill="#64ffda" font-size="5">Slice #128 - Segmented View</text>
+                        </svg>
+                    </div>
+
+                    <!-- Metrics Screen -->
+                    <div
+                        style="flex: 1; background: #0a192f; border: 1px solid #1f77b4; border-radius: 5px; padding: 10px; display: flex; flex-direction: column;">
+                        <div style="font-size: 9px; color: #64ffda; margin-bottom: 5px; font-weight: bold;">PREDICTION:
+                            GLIOMA</div>
+                        <div style="font-size: 7px; color: #8892b0; margin-bottom: 8px;">Confidence: <span
+                                style="color: #64ffda;">94.2%</span></div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 10px;">
+                            <div style="background: #112240; padding: 4px; border-radius: 3px;">
+                                <div style="font-size: 5px; color: #8892b0;">Whole Tumor</div>
+                                <div style="font-size: 8px; color: #ccd6f6; font-weight: bold;">0.91 DICE</div>
+                            </div>
+                            <div style="background: #112240; padding: 4px; border-radius: 3px;">
+                                <div style="font-size: 5px; color: #8892b0;">Enhancing</div>
+                                <div style="font-size: 8px; color: #ff6b6b; font-weight: bold;">0.88 DICE</div>
+                            </div>
+                        </div>
+                        <div
+                            style="border: 1px solid #233554; padding: 5px; border-radius: 3px; font-size: 6.5px; color: #8892b0; background: rgba(0,0,0,0.2);">
+                            <b>AI Clinical Report:</b><br>
+                            High contrast enhancement noted in the right frontal lobe. Morphology suggestive of
+                            glioblastoma. Volume: 42.3cm³.
+                        </div>
+                        <div style="margin-top: auto; display: flex; gap: 5px;">
+                            <div style="height: 4px; flex: 1; background: #4caf50; border-radius: 2px;"></div>
+                            <div style="height: 4px; flex: 0.5; background: #ffcc00; border-radius: 2px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="sdg-card">
+                <div class="sdg-logo">
+                    <div class="sdg-number">3</div>
+                    <div class="sdg-text">Good Health<br>& Well-Being</div>
+                    <svg width="60" height="20" viewBox="0 0 60 20" style="margin-top:5px">
+                        <path d="M0 10 L10 10 L15 2 L25 18 L30 10 L60 10" fill="none" stroke="white" stroke-width="2" />
+                    </svg>
+                </div>
+                <div class="impact-content">
+                    <h3 style="margin:0 0 5px 0; color:#2e7d32; font-size:18px;">Social Benefits & Future Scope</h3>
+                    <p>MedAdapt-SAM contributes directly to SDG 3 by providing AI-assisted diagnostic tools that enhance
+                        the precision of brain tumor detection. This reduces diagnostic latency and empowers clinicians
+                        with data-driven reports, ultimately improving patient survival rates and well-being.</p>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <div class="footer-banner">
+                <div class="campus-name">BHUBANESWAR CAMPUS</div>
+                <div class="date">MARCH 5, 2025</div>
+                <div class="uni-info">
+                    <strong>Centurion University of Technology and Management, Odisha</strong><br>
+                    <span style="font-size:12px; margin-top:5px; display:inline-block;">Paralakhemundi | Bhubaneswar |
+                        Rayagada | Balangir | Balasore | Chatrapur</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Download Control -->
+    <div class="no-print"
+        style="position: fixed; top: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 1000;">
+        <button onclick="window.print()"
+            style="padding: 12px 24px; background: #0f4c75; color: white; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.3); font-family: 'Outfit', sans-serif;">🖨️
+            Save as PDF</button>
+        <button id="download-btn"
+            style="padding: 12px 24px; background: #4caf50; color: white; border: none; border-radius: 50px; cursor: pointer; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.3); font-family: 'Outfit', sans-serif;">🖼️
+            Download as Image</button>
+    </div>
+
+    <style>
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+
+            body {
+                padding: 0;
+                background: white;
+            }
+
+            .poster-container {
+                box-shadow: none;
+                border: none;
+                border-radius: 0;
+            }
+        }
+    </style>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script>
+        document.getElementById('download-btn').addEventListener('click', function () {
+            const btn = this;
+            btn.innerHTML = "⌛ Generating...";
+            btn.disabled = true;
+
+            html2canvas(document.querySelector(".poster-container"), {
+                scale: 2, // Higher resolution
+                useCORS: true,
+                backgroundColor: "#f9fbfc"
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'MedAdapt-SAM-Poster.png';
+                link.href = canvas.toDataURL("image/png");
+                link.click();
+
+                btn.innerHTML = "🖼️ Download as Image";
+                btn.disabled = false;
+            });
+        });
+    </script>
+</body>
+
+</html>

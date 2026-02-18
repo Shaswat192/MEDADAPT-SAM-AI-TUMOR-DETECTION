@@ -1,0 +1,137 @@
+# MedAdapt-SAM Configuration File
+
+# Dataset Configuration
+dataset:
+  name: "BraTS2021"
+  data_path: "D:/major projrct PNG folder/brats_png"
+  image_size: 256
+  num_classes: 3  # ET, TC, WT
+  train_split: 0.7
+  val_split: 0.15
+  test_split: 0.15
+  
+# Model Configuration
+model:
+  # U-Net
+  unet:
+    in_channels: 3
+    out_channels: 3
+    features: [64, 128, 256, 512]
+    
+  # SAM
+  sam:
+    model_type: "vit_b"  # vit_b, vit_l, vit_h
+    checkpoint_path: "checkpoints/sam_vit_b_01ec64.pth"
+    freeze_image_encoder: false
+    freeze_prompt_encoder: false
+    freeze_mask_decoder: false
+    
+  # Adapter
+  adapter:
+    adapter_dim: 64
+    num_adapters: 12
+    adapter_type: "bottleneck"  # bottleneck, parallel
+    
+# Training Configuration
+training:
+  batch_size: 8
+  num_epochs: 100
+  learning_rate: 0.0001
+  weight_decay: 0.0001
+  optimizer: "AdamW"
+  scheduler: "CosineAnnealingLR"
+  early_stopping_patience: 15
+  
+  # Loss functions
+  loss:
+    dice_weight: 0.5
+    focal_weight: 0.3
+    boundary_weight: 0.2
+    
+# Prompt Configuration
+prompts:
+  # Box prompts
+  box:
+    enabled: true
+    margin: 5  # pixels
+    
+  # Point prompts
+  point:
+    enabled: true
+    num_positive: 5
+    num_negative: 3
+    sampling_strategy: "uncertainty"  # random, uncertainty, boundary
+    
+  # Hybrid prompts
+  hybrid:
+    enabled: true
+    box_weight: 0.6
+    point_weight: 0.4
+    
+  # Automatic prompt generation
+  automatic:
+    enabled: true
+    confidence_threshold: 0.7
+    uncertainty_threshold: 0.3
+    
+# Uncertainty Configuration
+uncertainty:
+  method: "monte_carlo"  # monte_carlo, ensemble, deep_ensemble
+  num_samples: 10
+  dropout_rate: 0.1
+  refinement_iterations: 3
+  
+# Evaluation Configuration
+evaluation:
+  metrics:
+    - "dice"
+    - "iou"
+    - "hausdorff"
+    - "hausdorff_95"
+    - "precision"
+    - "recall"
+  save_predictions: true
+  visualize_results: true
+  
+# Explainability Configuration
+explainability:
+  attention_maps: true
+  grad_cam: true
+  prompt_influence: true
+  save_visualizations: true
+  
+# LLM Configuration
+llm:
+  provider: "openai"  # openai, huggingface
+  model: "gpt-4"
+  temperature: 0.7
+  max_tokens: 500
+  
+  # RAG Configuration
+  rag:
+    enabled: true
+    vector_db: "chromadb"
+    embedding_model: "all-MiniLM-L6-v2"
+    top_k: 5
+    
+# Streamlit Configuration
+streamlit:
+  title: "MedAdapt-SAM: Brain Tumor Segmentation"
+  theme: "dark"
+  port: 8501
+  max_upload_size: 200  # MB
+  
+# Logging Configuration
+logging:
+  use_tensorboard: true
+  use_wandb: true
+  wandb_project: "MedAdapt-SAM"
+  log_interval: 10
+  save_checkpoint_interval: 5
+  
+# Paths
+paths:
+  checkpoints: "checkpoints"
+  results: "results"
+  logs: "logs"
+  visualizations: "visualizations"
